@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Compiled output
+dist/
+
+# Optional: Logs, environment variables, OS-specific files
+npm-debug.log*
+yarn-error.log*
+.env
+.DS_Store
+Thumbs.db
