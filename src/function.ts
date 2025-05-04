@@ -1,3 +1,5 @@
+export {};
+
 type MathOperation = (x: number, y: number) => number;
 
 
@@ -101,12 +103,42 @@ Incrementing value from 12
 */
 
 
-// const myObjArrow: MyData = {
-//     value: 20,
-//     increment: () => {
-//         console.log(this.value);
+// const myCounter = {
+//     currentValue: 0,
+//     increment: function() {
+//       this.currentValue++; // this が myCounter を指すことを期待
 //     }
-// }
-// myObjArrow.increment(); // undefined
+//   };
+  
+//   const incrementFn = myCounter.increment;
+//   incrementFn(); // Error
+/*
+TypeError: Cannot read properties of undefined (reading 'currentValue')
+    at increment (D:\workspace\code\ts-learning\dist\function.js:73:9)
+    at Object.<anonymous> (D:\workspace\code\ts-learning\dist\function.js:77:1)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:170:5)
+    at node:internal/main/run_main_module:36:49
+*/
 
-export {};
+
+// --- arrow function with this---
+// **Conclusion:** If you want to use `this` within a method of an object to refer to the object itself,
+// define the method with the `function` keyword instead of the Arrow function, and
+// It is safe and common to use TypeScript's `this` type annotation (`function(this: Type)`).
+const myCounterArrow: { currentValue: number; increment: () => void } = {
+    currentValue: 100,
+    increment: () => {
+        console.log("Inside arrow function: 'this' does not refer to myCounterArrow");
+    }
+};
+console.log("\nTesting counter with arrow function (will not work as expected):");
+myCounterArrow.increment();
+
+
+
