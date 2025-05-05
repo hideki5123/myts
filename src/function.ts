@@ -90,6 +90,13 @@ const myObject: MyData = {
         console.log(`Incrementing value from ${this.value}`);
         this.value++;
     }
+
+    // **Conclusion:** If you want to use `this` within a method of an object to refer to the object itself,
+    // define the method with the `function` keyword instead of the Arrow function, and
+    // It is safe and common to use TypeScript's `this` type annotation (`function(this: Type)`).
+    // increment: () => {
+    //     console.log("Inside arrow function: 'this' does not refer to myCounterArrow");
+    // }
 }
 
 myObject.increment(); 
@@ -125,20 +132,3 @@ TypeError: Cannot read properties of undefined (reading 'currentValue')
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:170:5)
     at node:internal/main/run_main_module:36:49
 */
-
-
-// --- arrow function with this---
-// **Conclusion:** If you want to use `this` within a method of an object to refer to the object itself,
-// define the method with the `function` keyword instead of the Arrow function, and
-// It is safe and common to use TypeScript's `this` type annotation (`function(this: Type)`).
-const myCounterArrow: { currentValue: number; increment: () => void } = {
-    currentValue: 100,
-    increment: () => {
-        console.log("Inside arrow function: 'this' does not refer to myCounterArrow");
-    }
-};
-console.log("\nTesting counter with arrow function (will not work as expected):");
-myCounterArrow.increment();
-
-
-
